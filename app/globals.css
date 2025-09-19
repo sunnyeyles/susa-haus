@@ -1,27 +1,237 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #374151;
+  --card: #fff7ed;
+  --card-foreground: #374151;
+  --popover: #ffffff;
+  --popover-foreground: #374151;
+  --primary: #fb6f4c; /* Orange from susahaus logo */
+  --primary-foreground: #ffffff;
+  --secondary: #2196f3; /* Blue from susahaus logo */
+  --secondary-foreground: #ffffff;
+  --accent: #fb6f4c; /* Orange accent */
+  --accent-foreground: #ffffff;
+  --muted: #fff7ed;
+  --muted-foreground: #374151;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #374151;
+  --input: #f1f5f9;
+  --ring: rgba(251, 111, 76, 0.5);
+  --chart-1: #fb6f4c;
+  --chart-2: #2196f3;
+  --chart-3: #fb6f4c;
+  --chart-4: #2196f3;
+  --chart-5: #fb6f4c;
+  --radius: 0.5rem;
+  --sidebar: #fff7ed;
+  --sidebar-foreground: #374151;
+  --sidebar-primary: #fb6f4c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #2196f3;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #374151;
+  --sidebar-ring: rgba(251, 111, 76, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.dark {
+  --background: #1f2937;
+  --foreground: #ffffff;
+  --card: #374151;
+  --card-foreground: #ffffff;
+  --popover: #1f2937;
+  --popover-foreground: #ffffff;
+  --primary: #ff8a65;
+  --primary-foreground: #ffffff;
+  --secondary: #42a5f5;
+  --secondary-foreground: #ffffff;
+  --accent: #ff8a65;
+  --accent-foreground: #ffffff;
+  --muted: #374151;
+  --muted-foreground: #d1d5db;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #4b5563;
+  --input: #374151;
+  --ring: rgba(255, 138, 101, 0.5);
+  --chart-1: #ff8a65;
+  --chart-2: #42a5f5;
+  --chart-3: #ff8a65;
+  --chart-4: #42a5f5;
+  --chart-5: #ff8a65;
+  --sidebar: #374151;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #ff8a65;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #42a5f5;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #4b5563;
+  --sidebar-ring: rgba(255, 138, 101, 0.5);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1 {
+    font-family: var(--font-raleway), sans-serif;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-raleway), sans-serif;
+    @apply font-bold tracking-tight;
+  }
+  h1 {
+    @apply text-4xl md:text-6xl;
+  }
+  h2 {
+    @apply text-3xl md:text-5xl;
+  }
+  h3 {
+    @apply text-2xl md:text-4xl;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* Parallax and image-heavy showcase styles */
+.parallax-container {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.parallax-element {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.parallax-back {
+  transform: translateZ(-1px) scale(2);
+}
+
+.parallax-base {
+  transform: translateZ(0);
+}
+
+/* Parallax layers with different speeds */
+.parallax-layer-1 {
+  transform: translateY(calc(var(--scroll-y, 0) * 0.1));
+}
+
+.parallax-layer-2 {
+  transform: translateY(calc(var(--scroll-y, 0) * 0.2));
+}
+
+.parallax-layer-3 {
+  transform: translateY(calc(var(--scroll-y, 0) * 0.3));
+}
+
+.parallax-layer-4 {
+  transform: translateY(calc(var(--scroll-y, 0) * 0.4));
+}
+
+.parallax-layer-5 {
+  transform: translateY(calc(var(--scroll-y, 0) * 0.5));
+}
+
+.image-showcase {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-showcase::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(251, 111, 76, 0.1),
+    rgba(33, 150, 243, 0.1)
+  );
+  z-index: 1;
+}
+
+.brutalist-border {
+  border: 4px solid #374151;
+  box-shadow: 8px 8px 0px rgba(251, 111, 76, 0.3);
+}
+
+/* Updated text shadow to use blue instead of green */
+.brutalist-text-shadow {
+  text-shadow: 4px 4px 0px rgba(33, 150, 243, 0.3);
+}
+
+/* Updated brand color utilities to only include orange and blue */
+.text-susahaus-orange {
+  color: #fb6f4c;
+}
+
+.text-susahaus-blue {
+  color: #2196f3;
+}
+
+.bg-susahaus-orange {
+  background-color: #fb6f4c;
+}
+
+.bg-susahaus-blue {
+  background-color: #2196f3;
 }
